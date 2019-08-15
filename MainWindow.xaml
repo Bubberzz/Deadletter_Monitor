@@ -1,0 +1,461 @@
+﻿<Window x:Class="Deadletter_Monitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MetroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" 
+        Height="650" Width="1150" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid HorizontalAlignment="Right" Margin="0,0,0.4,-0.4" Width="1150">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1" Grid.Row="1" Background="#FFC7C7C7">
+            <ScrollViewer>
+                <Grid Height="619">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Deadletter Alerts Top-->
+                    <ContentControl 
+                        x:Name="content_alertsTop" 
+                        Grid.Row="0" Grid.ColumnSpan="3" 
+                        Visibility="Visible" 
+                        Margin="0,0,5.2,0" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45*"/>
+                                <ColumnDefinition Width="45*"/>
+                                <ColumnDefinition Width="45*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Alert 1 START (Total Deadletters)-->
+                            <Grid Grid.Column="0" VerticalAlignment="Top">
+                                <Rectangle Height="120" Margin="20 20 20 20" Fill="White" RadiusX="10" RadiusY="10">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="20" RenderingBias="Quality" ShadowDepth="1" Color="#FFA8A8A8"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Grid Margin="30 20 30 20" Height="120">
+                                    <Grid Width="35" Height="50" Background="Green" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
+                                        <Grid.Effect>
+                                            <DropShadowEffect BlurRadius="20" Color="#FFA08E8E" RenderingBias="Quality" ShadowDepth="1"/>
+                                        </Grid.Effect>
+                                        <materialDesign:PackIcon Kind="ContentCopy" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
+                                    </Grid>
+                                    <TextBlock Text="Total Deadletters" HorizontalAlignment="Right" FontFamily="Ariel" Margin="5" VerticalAlignment="Top" Foreground="Gray" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="1 1 55 1">
+                                        <TextBlock x:Name="Total" Text="{Binding Total}" FontFamily="Ariel" VerticalAlignment="Center" Foreground="Gray" FontSize="50" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="Clear1" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" Cursor="Hand" Visibility="Hidden">
+                                        <materialDesign:PackIcon Kind="AlertOutline" Foreground="Red" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
+                                        <TextBlock Text="Please clear!" FontSize="10" Foreground="DarkRed"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <!--Alert 1 END-->
+
+                            <!--Alert 2 START (Older than 24hrs)-->
+                            <Grid Grid.Column="1" VerticalAlignment="Top">
+                                <Rectangle Height="120" Margin="20" Fill="White" RadiusX="10" RadiusY="10">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="20" RenderingBias="Quality" ShadowDepth="1" Color="#FFA8A8A8"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Grid Margin="30 20 30 20" Height="120">
+                                    <Grid Width="35" Height="50" Background="Orange" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
+                                        <Grid.Effect>
+                                            <DropShadowEffect BlurRadius="20" Color="#FFA08E8E" RenderingBias="Quality" ShadowDepth="1"/>
+                                        </Grid.Effect>
+                                        <materialDesign:PackIcon Kind="AlertBox" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
+                                    </Grid>
+                                    <TextBlock Text="Older than 24hrs" HorizontalAlignment="Right" FontFamily="Ariel" Margin="5" VerticalAlignment="Top" Foreground="Gray" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="1 1 55 1">
+                                        <TextBlock x:Name="Aged" Text="{Binding AgedTotal}" FontFamily="Ariel" VerticalAlignment="Center" Foreground="Gray" FontSize="50" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="Clear2" Visibility="Hidden" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" Cursor="Hand" >
+                                        <materialDesign:PackIcon Kind="AlertOutline" Foreground="Red" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
+                                        <TextBlock Text="Please clear!" FontSize="10" Foreground="DarkRed"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <!--Alert 2 END-->
+
+                            <!--Alert 3 START (Failed After Reprocessing)-->
+                            <Grid Grid.Column="2" VerticalAlignment="Top">
+                                <Rectangle Height="120" Margin="20" Fill="White" RadiusX="10" RadiusY="10">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="20" RenderingBias="Quality" ShadowDepth="1" Color="#FFA8A8A8"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Grid Margin="30 20 30 20" Height="120">
+                                    <Grid Width="35" Height="50" Background="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20 0">
+                                        <Grid.Effect>
+                                            <DropShadowEffect BlurRadius="20" Color="#FFA08E8E" RenderingBias="Quality" ShadowDepth="1"/>
+                                        </Grid.Effect>
+                                        <materialDesign:PackIcon Kind="EmoticonDead" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="5" Foreground="White" Width="20" Height="20"/>
+                                    </Grid>
+                                    <TextBlock Text="Failed After Reprocessing" HorizontalAlignment="Right" FontFamily="Ariel" Margin="5" VerticalAlignment="Top" Foreground="Gray" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="1 1 55 1">
+                                        <TextBlock x:Name="Failed" Text="{Binding Failed}" FontFamily="Ariel" VerticalAlignment="Center" Foreground="Gray" FontSize="50" />
+                                    </StackPanel>
+                                    <StackPanel x:Name="Clear3" Visibility="Hidden"  Orientation="Horizontal" VerticalAlignment="Bottom" Margin="20" Cursor="Hand" >
+                                        <materialDesign:PackIcon Kind="AlertOutline" Foreground="Red" Width="10" Height="10" VerticalAlignment="Center" Margin="5 0"/>
+                                        <TextBlock Text="Please clear!" FontSize="10" Foreground="DarkRed"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <!--Alert 3 END-->
+                        </Grid>
+                    </ContentControl>
+
+                    <!--Deadletter Alerts Bottom-->
+                    <ContentControl 
+                        x:Name="content_radialGauge" 
+                        Grid.Row="1" Grid.RowSpan="2" 
+                        Grid.ColumnSpan="3" 
+                        Visibility="Visible" 
+                        Margin="0,-10,-0.4,-2.8" >
+                        <Grid HorizontalAlignment="Center" Width="780" Height="600">
+                            <Rectangle Fill="White" RadiusX="10" RadiusY="10"
+                                       x:Name="BorderG1" Margin="-50,18,-50,162">
+                                <Rectangle.Effect>
+                                    <DropShadowEffect BlurRadius="20" RenderingBias="Quality" ShadowDepth="1" Color="#FFA8A8A8"/>
+                                </Rectangle.Effect>
+                            </Rectangle>
+                            <Grid Margin="-20 35 -20 180">
+                                <Grid.OpacityMask>
+                                    <VisualBrush Visual="{ Binding ElementName=BorderG2 }"/>
+                                </Grid.OpacityMask>
+                                <Border x:Name="BorderG2" CornerRadius="15" Background="#FF340051" Grid.ColumnSpan="2"/>
+                                <Grid Grid.ColumnSpan="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="45*"/>
+                                        <ColumnDefinition Width="45*"/>
+                                        <ColumnDefinition Width="50*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--RadialGaugeChart 1 START (ThisWeek)-->
+                                    <Grid Grid.Column="0">
+                                        <MetroChart:RadialGaugeChart 
+                                            Background="{x:Null}" 
+                                            ChartTitle="This Week" 
+                                            ChartSubTitle="Total deadletters" 
+                                            Foreground="LightGray" 
+                                            Margin="0,0,0,1">
+                                            <MetroChart:RadialGaugeChart.Series>
+                                                <MetroChart:ChartSeries
+                                                x:Name="ThisWeek"
+                                                DisplayMember="Title"
+                                                ItemsSource="{Binding Path=ThisWeek}"
+                                                SeriesTitle="This week" 
+                                                ValueMember="Percentage" 
+                                                HorizontalAlignment="Center"/>
+                                            </MetroChart:RadialGaugeChart.Series>
+                                        </MetroChart:RadialGaugeChart>
+                                    </Grid>
+                                    <!--RadialGaugeChart 1 END-->
+
+                                    <!--RadialGaugeChart 2 START (Today)-->
+                                    <Grid Grid.Column="1">
+                                        <MetroChart:RadialGaugeChart 
+                                            Background="{x:Null}" 
+                                            ChartTitle="Today" 
+                                            ChartSubTitle="Deadlettered today" 
+                                            Foreground="LightGray" 
+                                            Margin="0,0,0,1">
+                                            <MetroChart:RadialGaugeChart.Series>
+                                                <MetroChart:ChartSeries
+                                                    x:Name="Today"
+                                                    DisplayMember="Title"
+                                                    ItemsSource="{Binding Path=Today}"
+                                                    SeriesTitle="Today"
+                                                    ValueMember="Percentage" 
+                                                    HorizontalAlignment="Center"/>
+                                            </MetroChart:RadialGaugeChart.Series>
+                                        </MetroChart:RadialGaugeChart>
+                                    </Grid>
+                                    <!--RadialGaugeChart 2 END-->
+
+                                    <!--PieChart START (Files)-->
+                                    <Grid Grid.Column="2">
+                                        <MetroChart:PieChart 
+                                            Background="{x:Null}" 
+                                            Foreground="LightGray" 
+                                            Margin="0,0,0,1" 
+                                            ChartTitle="Files"
+                                            ChartSubTitle="File types in deadletter"
+                                            SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}" >
+                                            <MetroChart:PieChart.Series>
+                                                <MetroChart:ChartSeries
+                                                    x:Name="listViewInput"
+                                                    SeriesTitle="Errors"
+                                                    DisplayMember="Name"
+                                                    ValueMember="Number"
+                                                    HorizontalAlignment="Center"
+                                                    ItemsSource="{Binding Path=ListViewInput}"/>
+                                            </MetroChart:PieChart.Series>
+                                        </MetroChart:PieChart>
+                                    </Grid>
+                                    <!--PieChart END-->
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </ContentControl>
+
+                    <!--Reprocess section-->
+                    <ContentControl 
+                        x:Name="content_dataGrid" 
+                        Grid.Row="0" 
+                        Grid.RowSpan="3" 
+                        Grid.ColumnSpan="3" 
+                        Visibility="Hidden" 
+                        Margin="5,5,-0.4,50" >
+                        <Grid Background="White" Margin="10">
+                            <DataGrid 
+                                x:Name="deadletterLocations" 
+                                ItemsSource="{Binding DataGridInput}"
+                                DataContext="{Binding Source=DataGridInput, Path=MainWindow}"
+                                AutoGenerateColumns="False" 
+                                IsReadOnly="False" 
+                                CanUserAddRows="False"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="50">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding DataContext.IsAllSelected, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                          Command="{Binding DataContext.CheckAllStudentsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                          Command="{Binding DataContext.CheckStudentCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Location" Width="680" Binding="{Binding Location}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Count" Width="70" Binding="{Binding Count}"></DataGridTextColumn>
+                                    <DataGridTextColumn Header="Aged" Width="70" Binding="{Binding Aged}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ContentControl>
+        
+                    <!--Reprocess buttons-->
+                    <ContentControl 
+                        x:Name="reprocess_buttons" Grid.Row="3" Grid.ColumnSpan="3" 
+                        Visibility="Hidden" Margin="311,19.6,-0.4,283.2">
+                        <StackPanel Margin="0,0,5.2,-200" Orientation="Horizontal" Width="auto" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="43">
+                            <Button Width="110" Click="Button_Refresh" Margin="5" x:Name="button_Refresh" Background="#FF340051" VerticalAlignment="Bottom">
+                                <Grid>
+                                    <TextBlock HorizontalAlignment="Center" Text="REFRESH" FontFamily="Segoe UI Black"/>
+                                </Grid>
+                            </Button>
+                            <Button Width="110" Click="Button_Reprocess_Deadletters" Margin="5" x:Name="button_Reprocess" Background="#FF340051" VerticalAlignment="Bottom">
+                                <Grid>
+                                    <TextBlock HorizontalAlignment="Center" Text="REPROCESS" FontFamily="Segoe UI Black"/>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </ContentControl>
+
+                    <!--Configuration section-->
+                    <ContentControl 
+                        x:Name="config_dataGrid" 
+                        Grid.Row="0" 
+                        Grid.RowSpan="3" 
+                        Grid.ColumnSpan="3" 
+                        Visibility="Hidden" 
+                        Margin="5,5,-0.4,50" >
+                        <Grid Background="White" Margin="10">
+                            <DataGrid 
+                                x:Name="configDeadletters" 
+                                ItemsSource="{Binding DataGridInput}"
+                                DataContext="{Binding Source=DataGridInput, Path=MainWindow}"
+                                AutoGenerateColumns="False" 
+                                IsReadOnly="False" 
+                                CanUserAddRows="False"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="50">
+                                        <DataGridTemplateColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding DataContext.IsAllSelected, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                          Command="{Binding DataContext.CheckAllStudentsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.HeaderTemplate>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                          Command="{Binding DataContext.CheckStudentCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Location" Width="700" Binding="{Binding Location}"></DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </ContentControl>
+
+                    <!--Configuration buttons-->
+                    <ContentControl 
+                        x:Name="config_buttons" Grid.Row="3" Grid.ColumnSpan="3" 
+                        Visibility="Hidden" Margin="311,19.6,-0.4,283.2">
+                        <StackPanel Margin="0,0,5.2,-200" Orientation="Horizontal" Width="auto" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="43">
+                            <Button Width="110" Click="Button_Add_Location" Margin="5" x:Name="button_Add" Background="#FF340051" VerticalAlignment="Bottom">
+                                <Grid>
+                                    <TextBlock HorizontalAlignment="Center" Text="ADD" FontFamily="Segoe UI Black"/>
+                                </Grid>
+                            </Button>
+                            <Button Width="110" Click="Button_Remove_Location" Margin="5" x:Name="button_Remove" Background="#FF340051" VerticalAlignment="Bottom">
+                                <Grid>
+                                    <TextBlock HorizontalAlignment="Center" Text="REMOVE" FontFamily="Segoe UI Black"/>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </ContentControl>
+
+                    <!--Configuration login page-->
+                    <ContentControl x:Name="config_LogIn"   
+                                    Grid.Row="0" 
+                                    Grid.RowSpan="3" 
+                                    Grid.ColumnSpan="3" 
+                                    Visibility="Hidden" 
+                                    Margin="5,5,-0.4,10" >
+                        <Grid Background="White" Margin="10">
+                            <Grid Height="500" Width="350" >
+                                <Rectangle Height="280" VerticalAlignment="Top">
+                                    <Rectangle.Fill>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF2281D1"/>
+                                            <GradientStop Color="#FF34268A" Offset="1"/>
+                                            <GradientStop Color="#FF33288B" Offset="0.546"/>
+                                        </LinearGradientBrush>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                                <Rectangle Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,80" RadiusY="10" RadiusX="10" Fill="White">
+                                    <Rectangle.Effect>
+                                        <DropShadowEffect BlurRadius="15" Direction="0" RenderingBias="Quality" ShadowDepth="1" Color="#FFBBBBBB"/>
+                                    </Rectangle.Effect>
+                                </Rectangle>
+                                <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240">
+                                    <Label Content="LOGIN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
+                                    <StackPanel VerticalAlignment="Center" Margin="15">
+                                        <TextBox x:Name="Username" Margin="0,10" materialDesign:HintAssist.Hint="Username" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                                        <PasswordBox x:Name="Password" Margin="0,10" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Button IsDefault="True" Click="Button_LogIn" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN"/>
+                                <TextBlock Text="This area is for App Support - SCS" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray" Cursor="Hand"/>
+                                <Image Source="C:\Users\Stan.bubbers\source\repos\Deadletter-Monitor\settings.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
+                            </Grid>
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+        <!--Side Menu START-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="20" Color="White" RenderingBias="Quality" ShadowDepth="1"></DropShadowEffect>
+            </Grid.Effect>
+
+            <!--Logo START-->
+            <Grid Width="173">
+                <Grid.Background>
+                    <ImageBrush ImageSource="C:\Users\Stan.bubbers\source\repos\Deadletter-Monitor\asos.jpg" Stretch="Uniform"/>
+                </Grid.Background>
+            </Grid>
+            <!--Logo END-->
+
+            <StackPanel Grid.Row="1">
+                <!--Dashboard Button START-->
+                <Button Click="Button_Dashboard" Margin="10" x:Name="Dashboard" Background="#FF340051">
+                    <Grid Width="150">
+                        <materialDesign:PackIcon Kind="ViewDashboard" VerticalAlignment="Center" />
+                        <TextBlock HorizontalAlignment="Center" Text="DASHBOARD" FontFamily="Segoe UI Black"></TextBlock>
+                    </Grid>
+                </Button>
+                <!--Dashboard Button END-->
+
+                <!--Reprocess Button START-->
+                <Button Click="Button_Reprocess" Margin="10" x:Name="Reprocess" Background="#FF340051">
+                    <Grid Width="150">
+                        <materialDesign:PackIcon Kind="Reload" VerticalAlignment="Center" />
+                        <TextBlock HorizontalAlignment="Center" Text="REPROCESS" FontFamily="Segoe UI Black"></TextBlock>
+                    </Grid>
+                </Button>
+                <!--Reprocess Button END-->
+
+                <!--Config Button START-->
+                <Button Click="Button_Config" Margin="10" x:Name="Config" Background="#FF340051">
+                    <Grid Width="150">
+                        <materialDesign:PackIcon Kind="Cog" VerticalAlignment="Center" />
+                        <TextBlock HorizontalAlignment="Center" Text="CONFIGURATION" FontFamily="Segoe UI Black" Margin="21,0,10,0" Width="119"></TextBlock>
+                    </Grid>
+                </Button>
+                <!--Config Button END-->
+            </StackPanel>
+        </Grid>
+        <!--Side Menu END-->
+
+        <!--Top Toolbar START-->
+        <Grid x:Name="GridToolbar" Grid.ColumnSpan="2" Background="#FF340051" MouseDown="GridToolbar_MouseDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="79">
+                <!--Refresh Button START-->
+                <Button 
+                    x:Name="ButtonRefresh" 
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                    Width="25" Height="25" 
+                    Background="{x:Null}" BorderBrush="{x:Null}" 
+                    Foreground="White" Click="ButtonRefresh_Click">
+                    <materialDesign:PackIcon Kind="Refresh" />
+                </Button>
+                <!--Refresh Button END-->
+
+                <!--Minimise Button START-->
+                <Button
+                    x:Name="ButtonMinimise"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                    Width="25" Height="25" Background="{x:Null}" 
+                    BorderBrush="{x:Null}" Foreground="White"
+                    Click="ButtonMinimise_Click">
+                    <materialDesign:PackIcon Kind="ColourHelper" />
+                </Button>
+                <!--Minimise Button END-->
+
+                <!--Close Button START-->
+                <Button 
+                    x:Name="ButtonClose" 
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                    Width="25" Height="25" Background="{x:Null}" 
+                    BorderBrush="{x:Null}" Foreground="White" 
+                    Click="ButtonClose_Click">
+                    <materialDesign:PackIcon Kind="CloseBoxOutline" />
+                </Button>
+                <!--Close Button END-->
+            </StackPanel>
+        </Grid>
+        <!--Top Toolbar END-->
+    </Grid>
+</Window>

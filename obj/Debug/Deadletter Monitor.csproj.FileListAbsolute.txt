@@ -1,0 +1,33 @@
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\Deadletter Monitor.exe.config
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\Deadletter Monitor.exe
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\Deadletter Monitor.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\De.TorstenMandelkow.MetroChart.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\MaterialDesignColors.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.csprojAssemblyReference.cache
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\MainWindow.g.cs
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\App.g.cs
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor_MarkupCompile.cache
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\App.baml
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\MainWindow.baml
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.g.resources
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter_Monitor.Properties.Resources.resources
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.csproj.GenerateResource.cache
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.csproj.CoreCompileInputs.cache
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.csproj.CopyComplete
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.exe
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\obj\Debug\Deadletter Monitor.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\CommonServiceLocator.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.Extras.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.xml
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.Extras.xml
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\Stan.bubbers\Source\Repos\Deadletter-Monitor\bin\Debug\GalaSoft.MvvmLight.Platform.xml
